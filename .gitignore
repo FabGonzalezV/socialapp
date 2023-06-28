@@ -1,0 +1,24 @@
+# Ignorar archivos y directorios generados por Babel
+dist/
+
+# Ignorar archivos y directorios generados por Webpack
+node_modules/
+build/
+*.log
+
+# Ignorar archivos de variables de entorno de dotenv
+.env
+
+# Ignorar archivos de cache de Babel
+.cache/
+
+# Ignorar archivos de configuración de Babel
+.babelrc
+babel.config.js
+
+# Ignorar archivos de configuración de Webpack
+webpack.config.js
+
+# Ignorar archivos de lock de paquetes de npm
+package-lock.json
+yarn.lock
