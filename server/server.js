@@ -1,22 +1,22 @@
-import express from "express";
-import devBundle from './devBundle'
-import path from 'path'
-import template from './../template'
-const app = express()
-devBundle.compile(app)
+import { default as config } from "../config/config.mjs";
+import { default as app } from "./express.mjs";
+import mongoose from 'mongoose';
 
-const CURRENT_WORKING_DIR = process.cwd()
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
+const uri = 'mongodb://127.0.0.1:27017/prueba';
 
-
-app.get('/', (req, res) => {
-    res.status(200).send(template())
+ 
+mongoose.Promise = global.Promise;
+await mongoose.connect(uri)
+.then(() => {
+    console.log('Conexión exitosa a la base de datos');
 })
+.catch((error) => {
+    console.error('Error al conectar a la base de datos:', error);
+});
 
-let port = process.env.PORT || 3000
-app.listen(port, function onStart(err) {
+app.listen(config.port, (err) => {
     if (err) {
-        console.log(err)
+        console.log(err);
     }
-    console.info('Server started on port %s.', port)
-})
+    console.info(`server listening in port : ${config.port}`);
+});
